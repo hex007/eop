@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
 		f_name = argv[1];
 		xOffset = atoi(argv[2]);
 		yOffset = atoi(argv[3]);
-		width = 16 * (int) ceil(atoi(argv[4]) / 16);
-		height = 16 * (int) ceil(atoi(argv[5]) / 16);
+		width = atoi(argv[4]);
+		height = atoi(argv[5]);
 		break;
 	default:
 		usage(program);

@@ -68,10 +68,10 @@ bool loadJPG(const char *f_name, Image *image) {
 	height = cinfo.output_height;
 	pixel_size = cinfo.output_components;
 
-	bmp_size = width * height * pixel_size;
-	bmp_buffer = (unsigned char*) malloc(bmp_size);
+	row_stride = pixel_size * ((width + 15) & ~0x0F);
 
-	row_stride = width * pixel_size;
+	bmp_size = height * row_stride;
+	bmp_buffer = (unsigned char*) malloc(bmp_size);
 
 	while (cinfo.output_scanline < cinfo.output_height) {
 		unsigned char *buffer_array[1];
@@ -94,7 +94,7 @@ bool loadJPG(const char *f_name, Image *image) {
 	image->height = height;
 	image->buffer = bmp_buffer;
 	image->type = VC_IMAGE_RGB888;
-	image->pitch = 3 * width;
+	image->pitch = row_stride;
 
 	return true;
 }
