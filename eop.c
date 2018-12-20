@@ -26,6 +26,7 @@ void usage(const char *program)
 	fprintf(stderr, "	y        vertical offset\n");
 	fprintf(stderr, "	w        width to use [0 for height constrained]\n");
 	fprintf(stderr, "	h        height to use [0 for width constrained]\n");
+	fprintf(stderr, "	l        layer to use\n");
 	fprintf(stderr, "	           note: both height and width can be zero for fullscreen\n");
 	fprintf(stderr, "\n");
 
@@ -77,12 +78,13 @@ int main(int argc, char *argv[])
 	case 2:
 		f_name = argv[1];
 		break;
-	case 6:
+	case 7:
 		f_name = argv[1];
 		xOffset = atoi(argv[2]);
 		yOffset = atoi(argv[3]);
 		width = atoi(argv[4]);
 		height = atoi(argv[5]);
+		layer = atoi(argv[6]);
 		break;
 	default:
 		usage(program);
