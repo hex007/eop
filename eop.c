@@ -20,8 +20,9 @@ static void signalHandler(int signalNumber)
 void usage(const char *program)
 {
 	fprintf(stderr, "Usage: %s ", program);
-	fprintf(stderr, "<file> [x y w h]\n");
+	fprintf(stderr, "<file> l [x y w h]\n");
 	fprintf(stderr, "	file     png or jpeg file to display\n");
+	fprintf(stderr, "	l        layer, if not specified, layer will be 1.\n");
 	fprintf(stderr, "	x        horizontal offset\n");
 	fprintf(stderr, "	y        vertical offset\n");
 	fprintf(stderr, "	w        width to use [0 for height constrained]\n");
@@ -61,7 +62,7 @@ int endsWith(const char *str, const char *suffix)
 
 int main(int argc, char *argv[])
 {
-	int32_t layer = 1;
+	int layer = 1;
 	uint32_t displayNumber = 0;
 	int xOffset = 0;
 	int yOffset = 0;
@@ -77,12 +78,24 @@ int main(int argc, char *argv[])
 	case 2:
 		f_name = argv[1];
 		break;
-	case 6:
+	case 3:
 		f_name = argv[1];
+		layer = atoi(argv[2]);
+		break;
+	case 6:
+	    f_name = argv[1];
 		xOffset = atoi(argv[2]);
 		yOffset = atoi(argv[3]);
 		width = atoi(argv[4]);
 		height = atoi(argv[5]);
+		break;
+	case 7:
+		f_name = argv[1];
+		layer = atoi(argv[2]);	
+		xOffset = atoi(argv[3]);
+		yOffset = atoi(argv[4]);
+		width = atoi(argv[5]);
+		height = atoi(argv[6]);
 		break;
 	default:
 		usage(program);
